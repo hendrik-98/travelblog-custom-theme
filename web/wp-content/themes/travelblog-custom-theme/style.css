@@ -23,3 +23,226 @@ Text Domain: travelblog-custom-theme
     font-style: normal;
     src: url('./fonts/Roboto-Regular.ttf'); 
 }
+h1{
+    font-family: 'Roboto';
+}
+p {
+    font-size: 1.5rem;
+    text-align: center;
+}
+h1.title {
+    padding: 1rem;
+    margin: 0;
+    text-transform: uppercase;
+}
+h2.title {
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin-top: 0;
+    text-align: center;
+}
+.container {
+    position: relative;
+    font-family: 'Playfair';
+    margin: 0 auto;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 200px;
+}
+@media (max-width: 1200px) {
+    .container {
+        padding: 30px;
+    }
+}
+.container.border{
+    box-shadow: 0px 0px 20px 0px rgba(168,168,168,0.5);
+    margin-bottom: 2rem;
+}
+.thumbnail {
+    margin: 0 auto;
+    max-width: 1200px;
+    height: 440px;
+    position: relative;
+    max-width: 1200px; 
+    transition: max-width 0.5s ease;
+}
+.thumbnail img{
+    width: 100%;
+    object-fit: cover;
+}
+.thumbnail:before {
+    content: "Hotel";
+    position: absolute;
+    bottom: 0;
+    color: white;
+    margin: 1rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(2px);
+    border-radius: 2px;
+    font-family: 'Roboto';
+}
+.event-container .thumbnail:before{
+    content: "Event";
+}
+.breadcrumb {
+    font-family: 'Roboto';
+}
+.breadcrumb a {
+    text-decoration: none;
+    color: #000000;
+}
+.breadcrumb ul {
+    list-style: none;
+    display: flex;
+    padding: 1rem;
+    margin: 0;
+}
+.content {
+    display: none;
+}
+.destination {
+    font-family: 'Roboto';
+    font-weight: 600;
+    padding: 1rem;
+    text-transform: uppercase;
+}
+form#custom-search-form {
+    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+form#custom-search-form select {
+    width: 300px;
+    padding: 1rem;
+    border-radius: 0;
+    text-transform: uppercase;
+    font-family: 'Roboto';
+}
+input#event_date {
+    width: calc(300px - 34px);
+    padding: 1rem;
+    border-radius: 0;
+    text-transform: uppercase;
+    font-family: 'Roboto';
+    border: 1px solid;
+}
+.hotel-stars {
+    font-size: 2rem;
+}
+.event-date {
+    font-family: 'Roboto';
+}
+button.toggle-content-btn {
+    text-transform: uppercase;
+    background: none;
+    border: none;
+    border-bottom: 2px solid;
+    padding: 0.5rem 2rem;
+    margin: 2rem;
+    font-family: 'Roboto';
+    font-size: 1rem;
+    height: 2.25rem;
+    transition: font-size 0.3s ease;
+}
+button.toggle-content-btn:hover {
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: font-size 0.3s ease;
+}
+.wp-block-button.custom-button a {
+    background: none;
+    color: #000000;
+    font-family: Roboto;
+    font-size: 1rem;
+    border-bottom: 2px solid;
+    border-radius: 0;
+    padding: 0.5rem 2rem;
+    margin: 2rem;
+    transition: font-size 0.3s ease;
+    height: 2.25rem;
+}
+.wp-block-button.custom-button a:hover {
+    font-size: 1.1rem;
+    transition: font-size 0.3s ease;
+}
+.wp-block-gallery.custom-gallery:before {
+    font-family: 'Roboto';
+    font-weight: 600;
+    content: "Galerie";
+    position: absolute;
+    transform: translateY(-100%);
+    padding: 2rem 0;
+    width: 800px;
+    text-align: center;
+    text-transform: uppercase;
+}
+@media (max-width: 1200px) {
+    .wp-block-gallery.custom-gallery:before {
+        display: none;
+    }
+}
+iframe {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+}
+.video-container {
+    position: relative;
+}
+.video-container img {
+    width: 100%;
+}
+.video-container button {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid;
+    color: #ffffff;
+    background: none;
+    backdrop-filter: blur(1px);
+    font-size: 3rem;
+    cursor: pointer;
+    transition: font-size 0.3s ease;
+}
+.video-container button:hover {
+    font-size: 3.5rem;
+    transition: font-size 0.3s ease;
+}
+span.exit-content {
+    position: absolute;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    margin: 0 2rem;
+    display: none;
+}
+span.exit-content:hover {
+    cursor: pointer;
+}
+span.exit-content:before {
+    width: 30px;
+    background: #000000;
+    content: " ";
+    position: absolute;
+    border: 1px solid;
+    border-radius: 2px;
+    transform: rotate(45deg);
+    margin: 1rem 0;
+}
+span.exit-content:after {
+    width: 30px;
+    background: #000000;
+    content: " ";
+    position: absolute;
+    border: 1px solid;
+    border-radius: 2px;
+    transform: rotate(-45deg);
+    margin: 1rem 0;
+}
