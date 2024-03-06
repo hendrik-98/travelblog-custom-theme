@@ -135,7 +135,9 @@ if ( $hotels_query->have_posts() ) :
     endwhile;
     wp_reset_postdata();
 else :
-    echo 'Keine Hotels gefunden.';
+    ?>
+        <div class="container"><p>Keine Hotels gefunden.</p></div>
+    <?php
 endif;
 ?>
 

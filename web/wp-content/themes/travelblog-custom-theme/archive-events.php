@@ -121,7 +121,9 @@ if ( $events_query->have_posts() ) :
         endwhile;
     wp_reset_postdata();
 else :
-    echo 'Keine events gefunden.';
+    ?>
+        <div class="container"><p>Keine events gefunden.</p></div>
+    <?php
 endif;
 ?>
     
