@@ -1,4 +1,4 @@
-#Travelblog Custom Theme
+# Travelblog Custom Theme
 Das Theme umfasst 2 Custom Posttypes namens Hotels und Events.
 Hotels und Events haben die Taxonomy Destinations. 
 
@@ -21,18 +21,18 @@ Zum einfachen Erstellen der Beiträge habe ich für Hotels und auch Events eine 
 Mein Vorgehen beim Erstellen kann man gut Anhand meiner Git History verfogen. Hier gehts zum Repository (https://github.com/hendrik-98/travelblog-custom-theme/)
 Ich habe mit Docker gearbeitet. In meinem Docker Container ist ein apache webserever mit WordPress, phpmyadmin und mysql installiert.
 
-##Installation
+## Installation
 Die ZIP-Datei mit dem Theme, der Datenbank und den Uploads habe ich auch nocheinmal im Git hinterlegt.(https://github.com/hendrik-98/travelblog-custom-theme/releases/download/wordpress-theme/travel-blog-hendrik-egbers.zip)
 
-###Das Theme
+### Das Theme
 Das angepasste Theme für die Coding Challenge heißt travelblog-custom-theme.
 
-###Die Datenbank
+### Die Datenbank
 Ich habe die Datenbank als SQL Datei im Ordner Datenbank hinterlegt.
 
-###Die Mediadatein
+### Die Mediadatein
 Ich habe die Uplaods im Ordner Uplaods hinterlegt.
 
-###Sonstige Datien
+### Sonstige Datien
 Für den Fall, das es ein Problem gibt, mit den Test Beiträgen habe ich eine XML Datei für den Wordpress Importer im Ordner wordpress-export hinterlegt.
 
