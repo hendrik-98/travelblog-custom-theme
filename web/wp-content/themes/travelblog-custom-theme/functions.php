@@ -13,3 +13,6 @@ include_once( get_template_directory() . '/posttypes/events/metafields/events-me
 
 //Custom  Taxonomy einbinden
 include_once( get_template_directory() . '/taxonomie/destinations.php' );
+
+//add breadcrump 
+include_once( get_template_directory() . '/functions/breadcrump.php' );
