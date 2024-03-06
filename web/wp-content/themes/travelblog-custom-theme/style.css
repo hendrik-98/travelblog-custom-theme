@@ -8,3 +8,18 @@ License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: travelblog-custom-theme
 */
+
+/* PlayfairDisplay */
+@font-face {
+    font-display: swap;
+    font-family: 'Playfair';
+    font-style: normal;
+    src: url('./fonts/PlayfairDisplay.ttf'); 
+}
+/* Roboto-Regular */
+@font-face {
+    font-display: swap;
+    font-family: 'Roboto';
+    font-style: normal;
+    src: url('./fonts/Roboto-Regular.ttf'); 
+}
