@@ -1,0 +1,20 @@
+# Ignore .htaccess files
+web/.htaccess
+web/.htpasswd
+
+# Ignore files with credentials
+web/wp-config.php
+
+# Ignore Media files
+web/wp-content/uploads/
+web/wp-content/backup-db/
+web/wp-content/backups/
+web/wp-content/cache/
+web/wp-content/upgrade/
+web/wp-content/uploads/
+
+#Ignore local log files
+web/logs
+web/.idea
+
+
