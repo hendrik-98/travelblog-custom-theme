@@ -46,7 +46,7 @@ get_header();
         <option value="4" <?php selected( isset( $_GET['sterne'] ) ? $_GET['sterne'] : '', '4' ); ?>>4 Sterne</option>
         <option value="5" <?php selected( isset( $_GET['sterne'] ) ? $_GET['sterne'] : '', '5' ); ?>>5 Sterne</option>
     </select>
-    <input class="hotel-search" type="submit" value="Suchen" />
+    <input class="search" type="submit" value="Suchen" />
 </form>
 
 

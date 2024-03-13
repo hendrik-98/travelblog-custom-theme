@@ -7,51 +7,48 @@ get_header();
     <h1 class="title">Events</h1>
     <form id="custom-search-form" method="get" action="<?php echo esc_url( home_url( '/events/' ) ); ?>">
     <!-- Destination filter -->
+    <?php
+    // Keep the selected destination value if set
+    $selected_destination = isset($_GET['destination']) ? $_GET['destination'] : '';
+    ?>
     <select name="destination" id="destination-select">
-        <option value="" disabled selected hidden>Destination</option>
-        <?php
-        // Get all terms for 'destination' taxonomy
-        $terms = get_terms( 'destination', array( 'hide_empty' => true ) );
-        // Filter terms to include only those with associated events
-        foreach ( $terms as $term ) {
-            $events_query = new WP_Query( array(
-                'post_type'      => 'events',
-                'tax_query'      => array(
-                    array(
-                        'taxonomy' => 'destination',
-                        'field'    => 'slug',
-                        'terms'    => $term->slug
-                    )
-                ),
-                'posts_per_page' => 1 // Check if at least one event exists
-            ) );
-            // Display the term in the dropdown if it has events
-            if ( $events_query->have_posts() ) {
-                echo '<option value="' . esc_attr( $term->slug ) . '">' . esc_html( $term->name ) . '</option>';
-            }
-            // Reset the query
-            wp_reset_postdata();
+    <option value="" <?php if($selected_destination === '') echo 'selected'; ?>>Alle Destinationen</option>
+    <?php
+    // Get all terms for 'destination' taxonomy
+    $terms = get_terms( 'destination', array( 'hide_empty' => true ) );
+    // Filter terms to include only those with associated events
+    foreach ( $terms as $term ) {
+        $events_query = new WP_Query( array(
+            'post_type'      => 'events',
+            'tax_query'      => array(
+                array(
+                    'taxonomy' => 'destination',
+                    'field'    => 'slug',
+                    'terms'    => $term->slug
+                )
+            ),
+            'posts_per_page' => 1 // Check if at least one event exists
+        ) );
+        // Display the term in the dropdown if it has events
+        if ( $events_query->have_posts() ) {
+            echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( $selected_destination, $term->slug, false ) . '>' . esc_html( $term->name ) . '</option>';
         }
-        ?>
-        </select><input type="date" name="event_date" id="event_date">
-    </form>
-</div>
-<script>
-    // JavaScript code to submit the form when both selects are chosen
-    document.getElementById('destination-select').addEventListener('change', function() {
-        checkFormAndSubmit();
-    });
-    document.getElementById('event_date').addEventListener('change', function() {
-        checkFormAndSubmit();
-    });
-    function checkFormAndSubmit() {
-        var destinationValue = document.getElementById('destination-select').value;
-        var eventDateValue = document.getElementById('event_date').value;
-        if (destinationValue && eventDateValue) {
-            document.getElementById('custom-search-form').submit();
-        }
+        // Reset the query
+        wp_reset_postdata();
     }
-</script>
+    ?>
+    </select>
+
+    <?php
+    // Keep the selected event date if set
+    $selected_event_date = isset($_GET['event_date']) ? $_GET['event_date'] : '';
+    ?>
+    <input type="date" name="event_date" id="event_date" value="<?php echo esc_attr($selected_event_date); ?>">
+    <input class="search" type="submit" value="Suchen" />
+    </form>
+
+</div>
+
 <?php
 // Query events based on filters
 $args = array(
