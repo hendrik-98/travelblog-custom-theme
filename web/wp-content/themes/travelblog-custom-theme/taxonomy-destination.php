@@ -1,5 +1,9 @@
 <?php
 get_header();
+
+// Erhalte die ausgewählten Filterwerte
+$selected_sterne = isset( $_GET['sterne'] ) ? $_GET['sterne'] : '';
+$selected_datum = isset( $_GET['datum'] ) ? $_GET['datum'] : '';
 ?>
 
 <div class="container">
@@ -7,19 +11,19 @@ get_header();
     <h1 class="title"><?php single_term_title(); ?></h1>
     <form id="custom-search-form" method="get">
         <select name="sterne" id="sterne-filter">
-            <option value="" disabled selected hidden>Sterne</option>
-            <option value="1">1 Stern</option>
-            <option value="2">2 Sterne</option>
-            <option value="3">3 Sterne</option>
-            <option value="4">4 Sterne</option>
-            <option value="5">5 Sterne</option>
-        </select><input type="date" name="datum" id="event_date">
+            <option value="" disabled hidden <?php selected( $selected_sterne, '' ); ?>>Sterne</option>
+            <option value="all" <?php selected( $selected_sterne, 'all' ); ?>>Alle Sterne</option>
+            <option value="1" <?php selected( $selected_sterne, '1' ); ?>>1 Stern</option>
+            <option value="2" <?php selected( $selected_sterne, '2' ); ?>>2 Sterne</option>
+            <option value="3" <?php selected( $selected_sterne, '3' ); ?>>3 Sterne</option>
+            <option value="4" <?php selected( $selected_sterne, '4' ); ?>>4 Sterne</option>
+            <option value="5" <?php selected( $selected_sterne, '5' ); ?>>5 Sterne</option>
+        </select><input type="date" name="datum" id="event_date" value="<?php echo esc_attr( $selected_datum ); ?>">
     </form>
+
 </div>
 <?php 
-// Erhalte die ausgewählten Filterwerte
-$selected_sterne = isset( $_GET['sterne'] ) ? $_GET['sterne'] : '';
-$selected_datum = isset( $_GET['datum'] ) ? $_GET['datum'] : '';
+
 // Erhalte die aktuelle Taxonomie-Termin-ID
 $term_id = get_queried_object_id();
 // Baue die Query-Argumente für Hotels
@@ -47,15 +51,14 @@ $args_events = array(
     'meta_query' => array() // Leeres Array für die Meta-Abfrage
 );
 // Füge Metaabfragen basierend auf den ausgewählten Filtern hinzu
-if (!empty($selected_sterne) && empty($selected_datum)) {
+if (!empty($selected_sterne) && $selected_sterne !== 'all' && empty($selected_datum)) {
     // Nur Hotels anzeigen, wenn Sterne ausgewählt sind und kein Datum
     $args_hotels['meta_query'][] = array(
         'key' => 'hotel_sterne',
         'value' => $selected_sterne,
         'compare' => '='
     );
-} 
-elseif (empty($selected_sterne) && !empty($selected_datum)) {
+} elseif (empty($selected_sterne) && !empty($selected_datum)) {
     // Nur Events anzeigen, wenn Datum ausgewählt ist und keine Sterne
     $args_events['meta_query'][] = array(
         'key' => 'eventdatum',
