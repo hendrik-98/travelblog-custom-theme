@@ -169,7 +169,7 @@ button.toggle-content-btn:hover {
     font-size: 1.1rem;
     transition: font-size 0.3s ease;
 }
-.wp-block-gallery.custom-gallery:before {
+.wp-block-gallery:before {
     font-family: 'Roboto';
     font-weight: 600;
     content: "Galerie";
@@ -181,7 +181,7 @@ button.toggle-content-btn:hover {
     text-transform: uppercase;
 }
 @media (max-width: 1200px) {
-    .wp-block-gallery.custom-gallery:before {
+    .wp-block-gallery:before {
         display: none;
     }
 }
