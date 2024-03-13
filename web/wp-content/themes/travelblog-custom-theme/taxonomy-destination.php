@@ -104,6 +104,12 @@ if (empty($selected_datum)) {
                 </h2>
                 <div class="content">
                     <?php the_content(); ?>
+                    <?php if($externer_link !== ''){
+                        ?>
+                        <a href="<?php echo $externer_link;?>" class="link-btn">ZUM HOTEL</a>
+                        <?php
+                    }
+                    ?>
                 </div>
                 <button class="toggle-content-btn">Mehr dazu</button>
             </div>
@@ -151,6 +157,12 @@ if (!empty($selected_datum) || empty($selected_datum) && empty($selected_sterne)
                 </h2>
                 <div class="content">
                     <?php the_content(); ?>
+                    <?php if($externer_link !== ''){
+                        ?>
+                        <a href="<?php echo $externer_link;?>" class="link-btn">ZUM EVENT</a>
+                        <?php
+                    }
+                    ?>
                 </div>
                 <button class="toggle-content-btn">Mehr anzeigen</button>
             </div>

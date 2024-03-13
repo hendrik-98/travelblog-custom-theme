@@ -88,6 +88,7 @@ if ( $hotels_query->have_posts() ) :
     while ( $hotels_query->have_posts() ) :
         $hotels_query->the_post();
         $sterne = get_post_meta( get_the_ID(), 'hotel_sterne', true );
+        $externer_link = get_post_meta( $post->ID, 'externer_link', true );
         // Display hotel content
         ?>
         <div class="hotel-container">
@@ -122,6 +123,12 @@ if ( $hotels_query->have_posts() ) :
                 <!-- Content ausblenden -->
                 <div class="content">
                     <?php the_content(); ?>
+                    <?php if($externer_link !== ''){
+                        ?>
+                        <a href="<?php echo $externer_link;?>" class="link-btn">ZUM HOTEL</a>
+                        <?php
+                    }
+                    ?>
                 </div>
                 <button class="toggle-content-btn">Mehr anzeigen</button>
             </div>

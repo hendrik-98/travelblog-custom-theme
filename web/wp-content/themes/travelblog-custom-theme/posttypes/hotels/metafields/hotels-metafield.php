@@ -42,3 +42,36 @@ function speichern_hotel_sterne_metafeld( $post_id ) {
 }
 add_action( 'save_post', 'speichern_hotel_sterne_metafeld' );
 
+// Funktion zum Hinzufügen des Metafelds für den externen Link
+function hinzufuegen_externer_link_metafeld_hotels() {
+    add_meta_box(
+        'externer_link_metafeld',       // ID des Metafelds
+        'Externer Link',                // Titel des Metafelds
+        'zeige_externer_link_metafeld_hotels', // Callback-Funktion zum Anzeigen des Metafelds
+        'hotels',                       // Der Posttyp, für den das Metafeld angezeigt werden soll
+        'normal',                       // Die Position des Metafelds im Editor (hier: rechts)
+        'default'                       // Priorität des Metafelds
+    );
+}
+add_action( 'add_meta_boxes', 'hinzufuegen_externer_link_metafeld_hotels' );
+
+// Callback-Funktion zum Anzeigen des Metafelds für den externen Link
+function zeige_externer_link_metafeld_hotels( $post ) {
+    // Hole den Wert des Metafelds, falls vorhanden
+    $externer_link = get_post_meta( $post->ID, 'externer_link', true );
+    ?>
+    <label for="externer_link">Externer Link:</label>
+    <input type="url" id="externer_link" name="externer_link" value="<?php echo esc_attr( $externer_link ); ?>">
+    <?php
+}
+
+// Funktion zum Speichern des Metafelds für den externen Link
+function speichern_externer_link_metafeld_hotels( $post_id ) {
+    // Überprüfe, ob das Feld gespeichert werden soll
+    if ( isset( $_POST['externer_link'] ) ) {
+        // Sanitize und speichere den Wert des Metafelds
+        $externer_link = sanitize_url( $_POST['externer_link'] );
+        update_post_meta( $post_id, 'externer_link', $externer_link );
+    }
+}
+add_action( 'save_post', 'speichern_externer_link_metafeld_hotels' );

@@ -83,6 +83,7 @@ if ( $events_query->have_posts() ) :
         $events_query->the_post();
         $eventdate = get_post_meta( get_the_ID(), 'eventdatum', true );
         $eventdate_formatted = date('d.m.Y', strtotime($eventdate));
+        $externer_link = get_post_meta( $post->ID, 'externer_link', true );
         ?>
         <div class="event-container">
             <div class="thumbnail">
@@ -110,6 +111,12 @@ if ( $events_query->have_posts() ) :
                 <!-- Content ausblenden -->
                 <div class="content">
                     <?php the_content(); ?>
+                    <?php if($externer_link !== ''){
+                        ?>
+                        <a href="<?php echo $externer_link;?>" class="link-btn">ZUM EVENT</a>
+                        <?php
+                    }
+                    ?>
                 </div>
                 <button class="toggle-content-btn">Mehr anzeigen</button>
             </div>
