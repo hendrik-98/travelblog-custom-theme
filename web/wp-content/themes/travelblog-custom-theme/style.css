@@ -154,7 +154,7 @@ button.toggle-content-btn:hover {
     font-size: 1.1rem;
     transition: font-size 0.3s ease;
 }
-.wp-block-button.custom-button a {
+.wp-block-button a {
     background: none;
     color: #000000;
     font-family: Roboto;
@@ -166,7 +166,7 @@ button.toggle-content-btn:hover {
     transition: font-size 0.3s ease;
     height: 2.25rem;
 }
-.wp-block-button.custom-button a:hover {
+.wp-block-button a:hover {
     font-size: 1.1rem;
     transition: font-size 0.3s ease;
 }
