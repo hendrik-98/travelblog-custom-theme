@@ -251,3 +251,11 @@ span.exit-content:after {
 .width-100{
     max-width: 100%;
 }
+.hotel-search {
+    background: none;
+    border: 1px solid;
+    padding: 1rem;
+}
+.hotel-search:hover {
+    cursor: pointer;
+}

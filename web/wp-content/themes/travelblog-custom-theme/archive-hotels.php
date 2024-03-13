@@ -10,58 +10,48 @@ get_header();
 
     <form id="custom-search-form" method="get" action="<?php echo esc_url( home_url( '/hotels/' ) ); ?>">
     <!-- Destination filter -->
-        <select name="destination" id="destination-select">
-            <option value="" disabled selected hidden>Destination</option>
-            <?php
-            // Get all terms for 'destination' taxonomy
-            $terms = get_terms( 'destination', array( 'hide_empty' => true ) );
-            // Filter terms to include only those with associated hotels
-            foreach ( $terms as $term ) {
-                $hotels_query = new WP_Query( array(
-                    'post_type'      => 'hotels',
-                    'tax_query'      => array(
-                        array(
-                            'taxonomy' => 'destination',
-                            'field'    => 'slug',
-                            'terms'    => $term->slug
-                        )
-                    ),
-                    'posts_per_page' => 1 // Check if at least one event exists
-                ) );
-                // Display the term in the dropdown if it has hotels
-                if ( $hotels_query->have_posts() ) {
-                    echo '<option value="' . esc_attr( $term->slug ) . '">' . esc_html( $term->name ) . '</option>';
-                }
-                // Reset the query
-                wp_reset_postdata();
+    <select name="destination" id="destination-select">
+        <option value="" <?php selected( isset( $_GET['destination'] ) ? $_GET['destination'] : '', '' ); ?>>Alle Destinationen</option>
+        <?php
+        // Get all terms for 'destination' taxonomy
+        $terms = get_terms( 'destination', array( 'hide_empty' => true ) );
+        // Filter terms to include only those with associated hotels
+        foreach ( $terms as $term ) {
+            $hotels_query = new WP_Query( array(
+                'post_type'      => 'hotels',
+                'tax_query'      => array(
+                    array(
+                        'taxonomy' => 'destination',
+                        'field'    => 'slug',
+                        'terms'    => $term->slug
+                    )
+                ),
+                'posts_per_page' => 1 // Check if at least one event exists
+            ) );
+            // Display the term in the dropdown if it has hotels
+            if ( $hotels_query->have_posts() ) {
+                echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( isset( $_GET['destination'] ) ? $_GET['destination'] : '', $term->slug, false ) . '>' . esc_html( $term->name ) . '</option>';
             }
-            ?>
-        </select><select name="sterne" id="sterne-filter">
-            <option value="" disabled selected hidden>Sterne</option>
-            <option value="1">1 Stern</option>
-            <option value="2">2 Sterne</option>
-            <option value="3">3 Sterne</option>
-            <option value="4">4 Sterne</option>
-            <option value="5">5 Sterne</option>
-        </select>
-    </form>
-</div>
-<script>
-    // JavaScript code to submit the form when both selects are chosen
-    document.getElementById('destination-select').addEventListener('change', function() {
-        checkFormAndSubmit();
-    });
-    document.getElementById('sterne-filter').addEventListener('change', function() {
-        checkFormAndSubmit();
-    });
-    function checkFormAndSubmit() {
-        var destinationValue = document.getElementById('destination-select').value;
-        var sterneValue = document.getElementById('sterne-filter').value;
-        if (destinationValue && sterneValue) {
-            document.getElementById('custom-search-form').submit();
+            // Reset the query
+            wp_reset_postdata();
         }
-    }
-</script>
+        ?>
+    </select>
+    <!-- Sterne filter -->
+    <select name="sterne" id="sterne-filter">
+        <option value="" <?php selected( isset( $_GET['sterne'] ) ? $_GET['sterne'] : '', '' ); ?>>Alle Sterne</option>
+        <option value="1" <?php selected( isset( $_GET['sterne'] ) ? $_GET['sterne'] : '', '1' ); ?>>1 Stern</option>
+        <option value="2" <?php selected( isset( $_GET['sterne'] ) ? $_GET['sterne'] : '', '2' ); ?>>2 Sterne</option>
+        <option value="3" <?php selected( isset( $_GET['sterne'] ) ? $_GET['sterne'] : '', '3' ); ?>>3 Sterne</option>
+        <option value="4" <?php selected( isset( $_GET['sterne'] ) ? $_GET['sterne'] : '', '4' ); ?>>4 Sterne</option>
+        <option value="5" <?php selected( isset( $_GET['sterne'] ) ? $_GET['sterne'] : '', '5' ); ?>>5 Sterne</option>
+    </select>
+    <input class="hotel-search" type="submit" value="Suchen" />
+</form>
+
+
+
+</div>
 <?php
 // Query hotels based on filters
 $args = array(
@@ -69,24 +59,29 @@ $args = array(
     'posts_per_page' => -1, // Display all hotels
 );
 // Apply destination and sterne filters if set
-if ( isset( $_GET['destination'] ) && ! empty( $_GET['destination'] ) && isset( $_GET['sterne'] ) && ! empty( $_GET['sterne'] ) ) {
+if ( isset( $_GET['destination'] ) && ! empty( $_GET['destination'] ) || isset( $_GET['sterne'] ) && ! empty( $_GET['sterne'] ) ) {
     $args['tax_query'] = array(
         'relation' => 'AND',
-        array(
+    );
+
+    if ( isset( $_GET['destination'] ) && ! empty( $_GET['destination'] ) ) {
+        $args['tax_query'][] = array(
             'taxonomy' => 'destination',
             'field'    => 'slug',
             'terms'    => $_GET['destination'],
-        ),
-    );
-    $args['meta_query'] = array(
-        array(
+        );
+    }
+
+    if ( isset( $_GET['sterne'] ) && ! empty( $_GET['sterne'] ) ) {
+        $args['meta_query'][] = array(
             'key'     => 'hotel_sterne',
             'value'   => $_GET['sterne'],
             'compare' => '=',
             'type'    => 'NUMERIC',
-        ),
-    );
+        );
+    }
 }
+
 $hotels_query = new WP_Query( $args );
 // Start the loop
 if ( $hotels_query->have_posts() ) :
