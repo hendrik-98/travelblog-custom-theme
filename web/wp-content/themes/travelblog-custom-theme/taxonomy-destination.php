@@ -72,6 +72,7 @@ if (empty($selected_datum)) {
     if ($query_hotels->have_posts()) {
         while ($query_hotels->have_posts()) : $query_hotels->the_post();
         $sterne = get_post_meta(get_the_ID(), 'hotel_sterne', true);
+        $externer_link = get_post_meta( $post->ID, 'externer_link', true );
         // Display hotel content
         ?>
         <div class="hotel-container">
@@ -132,6 +133,7 @@ if (!empty($selected_datum) || empty($selected_datum) && empty($selected_sterne)
         while ($query_events->have_posts()) : $query_events->the_post();
         $eventdate = get_post_meta( get_the_ID(), 'eventdatum', true );
         $eventdate_formatted = date('d.m.Y', strtotime($eventdate));
+        $externer_link = get_post_meta( $post->ID, 'externer_link', true );
         ?>
         <div class="event-container">
             <div class="thumbnail">
@@ -215,6 +217,7 @@ const filterInputs = filterForm.querySelectorAll('select, input[type="date"]');
 
 <?php
 wp_enqueue_script('content-toggle-script', get_template_directory_uri() . '/js/content-toggle.js', '1.0', true);
+wp_enqueue_script('link-script', get_template_directory_uri() . '/js/link.js', '1.0', true);
 
 get_footer();
 

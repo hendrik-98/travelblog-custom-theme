@@ -133,5 +133,6 @@ endif;
     
 <?php
 wp_enqueue_script('content-toggle-script', get_template_directory_uri() . '/js/content-toggle.js', '1.0', true);
+wp_enqueue_script('link-script', get_template_directory_uri() . '/js/link.js', '1.0', true);
 
 get_footer();
