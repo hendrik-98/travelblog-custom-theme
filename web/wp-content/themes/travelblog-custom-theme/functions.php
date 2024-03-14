@@ -19,3 +19,6 @@ include_once( get_template_directory() . '/functions/breadcrump.php' );
 
 //add shortcodes
 include_once( get_template_directory() . '/shortcodes/youtube/youtube.php' );
+
+//add required input 
+include_once( get_template_directory() . '/functions/required.php' );
