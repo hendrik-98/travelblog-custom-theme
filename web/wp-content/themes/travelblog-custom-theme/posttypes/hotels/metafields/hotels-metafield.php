@@ -64,14 +64,25 @@ function zeige_externer_link_metafeld_hotels( $post ) {
     <input type="url" id="externer_link" name="externer_link" value="<?php echo esc_attr( $externer_link ); ?>">
     <?php
 }
-
 // Funktion zum Speichern des Metafelds für den externen Link
 function speichern_externer_link_metafeld_hotels( $post_id ) {
-    // Überprüfe, ob das Feld gespeichert werden soll
+    // Überprüfe, ob das Feld gespeichert werden soll und ob es sich um eine gültige URL handelt
     if ( isset( $_POST['externer_link'] ) ) {
-        // Sanitize und speichere den Wert des Metafelds
         $externer_link = sanitize_url( $_POST['externer_link'] );
-        update_post_meta( $post_id, 'externer_link', $externer_link );
+        
+        // Überprüfen, ob die URL gültig ist
+        $valid_url = wp_http_validate_url( $externer_link );
+        
+        if ( $valid_url ) {
+            // Speichere den Wert des Metafelds
+            update_post_meta( $post_id, 'externer_link', $externer_link );
+        } 
+        else {
+            // Fehlermeldung ausgeben
+        }
     }
 }
 add_action( 'save_post', 'speichern_externer_link_metafeld_hotels' );
+
+
+
